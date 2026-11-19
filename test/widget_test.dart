@@ -7,6 +7,6 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: VybeApp()));
     await tester.pumpAndSettle();
 
-    expect(find.text('Temporary Home Screen'), findsOneWidget);
+    expect(find.text('VYBE'), findsOneWidget);
   });
 }

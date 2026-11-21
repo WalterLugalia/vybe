@@ -33,3 +33,10 @@ final class UnknownException extends AppException{
     super.cause,
   });
 }
+
+final class StorageException extends AppException {
+  const StorageException({
+    super.message = 'something went wrong while accessing the storage.',
+    super.cause,
+  });
+}

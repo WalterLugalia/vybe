@@ -29,7 +29,8 @@ abstract final class AppTheme {
       displayColor: AppColors.textPrimary,
     );
 
-    return ThemeData(
+        return ThemeData(
+      fontFamily: 'Inter',
       colorScheme: colorScheme,
       scaffoldBackgroundColor: AppColors.background,
       textTheme: textTheme,

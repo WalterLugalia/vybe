@@ -40,3 +40,23 @@ final class StorageException extends AppException {
     super.cause,
   });
 }
+
+enum AuthFailure {
+  invalidCredentials,
+  emailAlreadyRegistered,
+  weakPassword,
+  emailNotConfirmed,
+  tooManyRequests,
+  signUpDisabled,
+  unknown,
+}
+
+final class AuthException extends AppException {
+  const AuthException({
+    required this.failure,
+    required super.message,
+    super.cause,
+  });
+
+  final AuthFailure failure;
+}

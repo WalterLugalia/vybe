@@ -6,16 +6,18 @@ void main() {
   test('reads Supabase values from the loaded environment', () {
     dotenv.loadFromString(
       envString: 'SUPABASE_URL=https://example.supabase.co\n'
-          'SUPABASE_ANON_KEY=test-key',
+          'SUPABASE_PUBLISHABLE_KEY=test-key',
     );
 
     expect(AppConfig.supabaseUrl, 'https://example.supabase.co');
-    expect(AppConfig.supabaseAnonKey, 'test-key');
+    expect(AppConfig.supabasePublishableKey, 'test-key');
     expect(AppConfig.hasSupabaseConfig, isTrue);
   });
 
   test('reports missing config when values are blank', () {
-    dotenv.loadFromString(envString: 'SUPABASE_URL=\nSUPABASE_ANON_KEY=');
+    dotenv.loadFromString(
+      envString: 'SUPABASE_URL=\nSUPABASE_PUBLISHABLE_KEY=',
+    );
 
     expect(AppConfig.hasSupabaseConfig, isFalse);
   });

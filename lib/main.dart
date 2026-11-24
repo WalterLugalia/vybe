@@ -12,16 +12,16 @@ Future<void> main() async {
   await dotenv.load(fileName: '.env');
   await HiveService.initialize();
 
-  if (!AppConfig.hasSupabaseConfig) {
+   if (!AppConfig.hasSupabaseConfig) {
     throw StateError(
       'Supabase is not configured. '
-      'Fill SUPABASE_URL and SUPABASE_ANON_KEY in .env.',
+      'Fill SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY in .env.',
     );
   }
 
   await Supabase.initialize(
     url: AppConfig.supabaseUrl,
-    anonKey: AppConfig.supabaseAnonKey,
+    publishableKey: AppConfig.supabasePublishableKey,
   );
 
   runApp(const ProviderScope(child: VybeApp()));

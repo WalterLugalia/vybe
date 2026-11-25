@@ -4,7 +4,7 @@ import 'package:vybe/app/router/app_router.dart';
 import 'package:vybe/app/router/route_paths.dart';
 
 void main() {
-  testWidgets('router starts on the home route', (tester) async {
+  testWidgets('router starts on the splash route', (tester) async {
     final container = ProviderContainer();
     addTearDown(container.dispose);
 
@@ -12,7 +12,7 @@ void main() {
 
     expect(
       router.routeInformationProvider.value.uri.path,
-      RoutePaths.home,
+      RoutePaths.splash,
     );
   });
 }

@@ -1,3 +1,3 @@
-abstract final class RoutePaths{
-    static const String home ='/';
+abstract final class RoutePaths {
+  static const String splash = '/splash';
 }

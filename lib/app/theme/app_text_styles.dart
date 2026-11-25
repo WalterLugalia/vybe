@@ -38,4 +38,17 @@ static const TextStyle label = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
+static const TextStyle wordmark = TextStyle(
+  fontSize: 56,
+  fontWeight: FontWeight.w700,
+  letterSpacing: 2,
+  height: 1,
+
+);
+static const TextStyle tagline = TextStyle(
+  fontSize: 13,
+  fontWeight: FontWeight.w400,
+  height: 1.4,
+);
+
 }

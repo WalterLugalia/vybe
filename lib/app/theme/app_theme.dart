@@ -44,7 +44,7 @@ abstract final class AppTheme {
     return InputDecorationTheme(
       filled: true,
       fillColor: AppColors.surface,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 17),
       hintStyle: AppTextStyles.body.copyWith(color: AppColors.textSecondary),
       errorStyle: AppTextStyles.caption.copyWith(color: AppColors.coral),
       border: _outline(AppColors.border),

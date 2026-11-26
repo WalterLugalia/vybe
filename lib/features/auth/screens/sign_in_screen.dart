@@ -83,6 +83,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               controller: _emailController,
                               hintText: 'Email or username',
                               validator: Validators.email,
+                              autocorrect: false,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.email],

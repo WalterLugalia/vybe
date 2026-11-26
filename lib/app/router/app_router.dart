@@ -5,18 +5,24 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/screens/sign_in_screen.dart';
 import '../../features/auth/screens/sign_up_screen.dart';
 import '../../features/auth/screens/splash_screen.dart';
+import '../../features/auth/screens/welcome_screen.dart';
 import 'route_names.dart';
 import 'route_paths.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
-    initialLocation: RoutePaths.signUp,
+    initialLocation: RoutePaths.welcome,
     debugLogDiagnostics: kDebugMode,
     routes: [
       GoRoute(
         path: RoutePaths.splash,
         name: RouteNames.splash,
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.welcome,
+        name: RouteNames.welcome,
+        builder: (context, state) => const WelcomeScreen(),
       ),
       GoRoute(
         path: RoutePaths.signIn,

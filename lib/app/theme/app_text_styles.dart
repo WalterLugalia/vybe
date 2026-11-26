@@ -51,4 +51,10 @@ static const TextStyle tagline = TextStyle(
   height: 1.4,
 );
 
+  static const TextStyle display = TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.w700,
+    height: 1.2,
+  );
+
 }

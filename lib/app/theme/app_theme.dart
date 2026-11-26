@@ -37,6 +37,7 @@ abstract final class AppTheme {
       textTheme: textTheme,
       inputDecorationTheme: _inputDecorationTheme,
       filledButtonTheme: _filledButtonTheme,
+      textButtonTheme: _textButtonTheme,
     );
   }
 
@@ -68,6 +69,16 @@ abstract final class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radius),
         ),
+      ),
+    );
+  }
+
+    static TextButtonThemeData get _textButtonTheme {
+    return TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.textSecondary,
+        textStyle: AppTextStyles.button,
+        minimumSize: const Size(0, 44),
       ),
     );
   }

@@ -7,7 +7,7 @@ import 'package:vybe/features/auth/models/app_user.dart';
 
 import 'package:vybe/features/auth/repositories/auth_repository.dart';
 
-import '../../../../ib/features/auth/providers/auth_provider.dart';
+import 'package:vybe/features/auth/providers/auth_provider.dart';
 
 const _user = AppUser(
   id: 'user-1',
@@ -171,4 +171,36 @@ void main() {
 
     expect(container.read(authProvider).error, isA<UnknownException>());
   });
+
+
+   test('clearError removes a stored error', () async {
+    final fake = _FakeAuthRepository()
+      ..failure = const AuthException(
+        failure: AuthFailure.invalidCredentials,
+        message: 'Incorrect email or password.',
+      );
+    final container = _containerFor(fake);
+
+    await container
+        .read(authProvider.notifier)
+        .signIn(email: 'maya@example.com', password: 'wrong');
+    expect(container.read(authProvider).error, isNotNull);
+
+    container.read(authProvider.notifier).clearError();
+
+    final state = container.read(authProvider);
+    expect(state.error, isNull);
+    expect(state.isBusy, isFalse);
+  });
+
+  test('clearError does nothing when there is no error', () {
+    final container = _containerFor(_FakeAuthRepository());
+    final before = container.read(authProvider);
+
+    container.read(authProvider.notifier).clearError();
+
+    expect(container.read(authProvider), same(before));
+  }); 
+
+
 }

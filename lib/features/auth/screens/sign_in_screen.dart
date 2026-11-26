@@ -23,7 +23,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  @override
+    @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (mounted) {
+        ref.read(authProvider.notifier).clearError();
+      }
+    });
+  }
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();

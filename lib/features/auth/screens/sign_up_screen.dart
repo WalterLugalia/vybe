@@ -25,7 +25,15 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
-  @override
+    @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (mounted) {
+        ref.read(authProvider.notifier).clearError();
+      }
+    });
+  }
   void dispose() {
     _fullNameController.dispose();
     _usernameController.dispose();

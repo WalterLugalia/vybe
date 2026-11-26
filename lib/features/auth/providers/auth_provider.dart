@@ -62,6 +62,13 @@ class AuthNotifier extends Notifier<AuthState> {
     return _run(_repository.signOut);
   }
 
+    void clearError() {
+    if (state.error == null) {
+      return;
+    }
+    state = AuthState(user: state.user, isBusy: state.isBusy);
+  }
+
   Future<void> _run(Future<void> Function() action) async {
     state = AuthState(user: state.user, isBusy: true);
     try {

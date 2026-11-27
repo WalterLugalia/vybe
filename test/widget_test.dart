@@ -1,31 +1,45 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vybe/app/app.dart';
+import 'package:vybe/features/auth/providers/auth_provider.dart';
+import 'package:vybe/features/auth/providers/auth_state.dart';
+import 'package:vybe/features/onboarding/providers/onboarding_provider.dart';
+import 'package:vybe/features/onboarding/repositories/onboarding_repository.dart';
 
-// import 'package:vybe/main.dart';
+class _SignedOutNotifier extends AuthNotifier {
+  @override
+  AuthState build() => const AuthState();
+}
+
+class _NeverSeenOnboarding implements OnboardingRepository {
+  @override
+  Future<bool> hasSeenOnboarding() async => false;
+
+  @override
+  Future<void> markOnboardingSeen() async {}
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const VybeApp());
+  testWidgets('splash leads a new signed-out user to onboarding',
+      (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authProvider.overrideWith(_SignedOutNotifier.new),
+          onboardingRepositoryProvider.overrideWithValue(
+            _NeverSeenOnboarding(),
+          ),
+        ],
+        child: const VybeApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('VYBE'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('A world beyond the scroll'), findsOneWidget);
   });
 }

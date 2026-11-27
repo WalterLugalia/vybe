@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class VybeApp extends StatelessWidget {
+import 'router/app_router.dart';
+import 'theme/app_theme.dart';
+
+class VybeApp extends ConsumerWidget {
   const VybeApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(appRouterProvider);
+
+    return MaterialApp.router(
       title: 'VYBE',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const Scaffold(body: Center(child: Text('VYBE'))),
+      theme: AppTheme.dark,
+      routerConfig: router,
     );
   }
 }

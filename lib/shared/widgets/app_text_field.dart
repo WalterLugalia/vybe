@@ -10,6 +10,8 @@ class AppTextField extends StatelessWidget {
     required this.hintText,
     this.validator,
     this.obscureText = false,
+    this.autocorrect = true,
+    this.textCapitalization = TextCapitalization.none,
     this.keyboardType,
     this.textInputAction,
     this.autofillHints,
@@ -20,6 +22,8 @@ class AppTextField extends StatelessWidget {
   final String hintText;
   final FormFieldValidator<String>? validator;
   final bool obscureText;
+  final bool autocorrect;
+  final TextCapitalization textCapitalization;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final Iterable<String>? autofillHints;
@@ -33,10 +37,11 @@ class AppTextField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
+      textCapitalization: textCapitalization,
       autofillHints: autofillHints,
       onFieldSubmitted: onSubmitted,
-      autocorrect: !obscureText,
-      enableSuggestions: !obscureText,
+      autocorrect: autocorrect && !obscureText,
+      enableSuggestions: autocorrect && !obscureText,
       style: AppTextStyles.body.copyWith(color: AppColors.textPrimary),
       decoration: InputDecoration(hintText: hintText),
     );

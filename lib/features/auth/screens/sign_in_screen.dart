@@ -23,6 +23,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+    @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (mounted) {
+        ref.read(authProvider.notifier).clearError();
+      }
+    });
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -83,6 +93,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               controller: _emailController,
                               hintText: 'Email or username',
                               validator: Validators.email,
+                              autocorrect: false,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.email],

@@ -24,5 +24,7 @@ Future<void> main() async {
     publishableKey: AppConfig.supabasePublishableKey,
   );
 
+  
+
   runApp(const ProviderScope(child: VybeApp()));
 }

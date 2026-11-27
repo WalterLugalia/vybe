@@ -1,10 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router/startup_route.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_text_styles.dart';
+import '../../onboarding/providers/onboarding_provider.dart';
+import '../providers/auth_provider.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends ConsumerState<SplashScreen> {
+  static const Duration _minimumDisplay = Duration(milliseconds: 1500);
+
+  @override
+  void initState() {
+    super.initState();
+    _start();
+  }
+
+  Future<void> _start() async {
+    final minimumDisplay = Future<void>.delayed(_minimumDisplay);
+    final hasSeenOnboarding =
+        await ref.read(onboardingRepositoryProvider).hasSeenOnboarding();
+    await minimumDisplay;
+    if (!mounted) {
+      return;
+    }
+
+    final routeName = startRouteName(
+      isAuthenticated: ref.read(authProvider).isAuthenticated,
+      hasSeenOnboarding: hasSeenOnboarding,
+    );
+    if (routeName != null) {
+      context.goNamed(routeName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

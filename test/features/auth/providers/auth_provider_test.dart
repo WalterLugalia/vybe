@@ -203,4 +203,17 @@ void main() {
   }); 
 
 
+    test('a sign-out event from the stream clears the user', () async {
+    final fake = _FakeAuthRepository(user: _user);
+    final container = _containerFor(fake);
+    container.read(authProvider);
+    expect(container.read(authProvider).user, same(_user));
+
+    fake.controller.add(null);
+    await pumpEventQueue();
+
+    expect(container.read(authProvider).isAuthenticated, isFalse);
+  });
+
+
 }

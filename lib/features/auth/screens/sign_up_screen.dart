@@ -34,6 +34,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       }
     });
   }
+   @override
   void dispose() {
     _fullNameController.dispose();
     _usernameController.dispose();

@@ -32,6 +32,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       }
     });
   }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();

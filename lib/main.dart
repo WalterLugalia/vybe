@@ -24,5 +24,9 @@ Future<void> main() async {
     publishableKey: AppConfig.supabasePublishableKey,
   );
 
+  debugPrint(
+    'Restored user: ${Supabase.instance.client.auth.currentUser?.email}',
+  );
+
   runApp(const ProviderScope(child: VybeApp()));
 }

@@ -12,7 +12,7 @@ import 'route_paths.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
-    initialLocation: RoutePaths.splash,
+    initialLocation: RoutePaths.signIn,
     debugLogDiagnostics: kDebugMode,
     routes: [
       GoRoute(
